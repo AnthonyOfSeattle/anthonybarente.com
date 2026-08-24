@@ -102,12 +102,14 @@ params:
     minMatchCharLength: 0
     limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
     keys: ["title", "permalink", "summary", "content"]
+
 menu:
   main:
     - identifier: cv
       name: CV
       url: /cv/
       weight: 10
+
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
@@ -118,3 +120,7 @@ markup:
     # guessSyntax: true
     # lineNos: true
     # style: monokai
+
+caches:
+  images:
+    dir: :cacheDir/images
