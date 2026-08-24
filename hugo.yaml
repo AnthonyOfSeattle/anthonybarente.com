@@ -16,7 +16,7 @@ params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Anthony Barente
   description: Anthony Barente's Personal Site
-  keywords: [Blog, Portfolio, PaperMod]
+  keywords: [Data Science, Computational Biology, Drug Development, Drug Discovery, Cell Signalling, Proteomics, Phosphoproteomics, Mass Spectrometry, NGS, Omics]
   author: Anthony Barente
   # author: ["Me", "You"] # multiple authors
   images: ["<link or path of image for opengraph, twitter-cards>"]
@@ -58,14 +58,12 @@ params:
   profileMode:
     enabled: true # needs to be explicitly set
     title: Anthony Barente
-    subtitle: "Data Scientist and Computational Biologist"
+    subtitle: "Data Science, Computational Biology, Omics for Drug Discovery"
     imageUrl: "profile-picture.jpg"
     imageWidth: 200
     imageHeight: 200
     imageTitle: Profile Picture
     buttons:
-      - name: About
-        url: about
       - name: CV
         url: cv
 
@@ -106,14 +104,10 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    - identifier: about
-      name: About
-      url: /about/
-      weight: 10
     - identifier: cv
       name: CV
       url: /cv/
-      weight: 20
+      weight: 10
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
