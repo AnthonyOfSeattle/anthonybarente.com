@@ -64,6 +64,8 @@ params:
     imageHeight: 200
     imageTitle: Profile Picture
     buttons:
+      - name: About
+        url: about
       - name: CV
         url: cv
 
@@ -105,10 +107,14 @@ params:
 
 menu:
   main:
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 10
     - identifier: cv
       name: CV
       url: /cv/
-      weight: 10
+      weight: 20
 
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
