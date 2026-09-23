@@ -1,5 +1,5 @@
 +++
-date = '2026-09-21T13:27:05Z'
+date = '2026-09-23T00:00:00Z'
 draft = false
 title = 'The MLE for the Log Normal CV'
 +++
