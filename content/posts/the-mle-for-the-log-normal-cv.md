@@ -1,7 +1,7 @@
 +++
 date = '2026-09-21T13:27:05Z'
 draft = false
-title = 'The Log Normal CV MLE'
+title = 'The MLE for the Log Normal CV'
 +++
 
 ### Background
@@ -72,7 +72,7 @@ $$
 \theta = f(\sigma) = \sqrt{\exp\left( \frac{1}{2} \sigma^2 \right) - 1}
 $$
 
-For $\sigma$ a maximum likelihood estimator exists and has the following form for a sample of $z_1,\ ...\ ,z_N$ absolute log fold changes.
+For $\sigma$, a maximum likelihood estimator exists and has the following form for a sample of $z_1,\ ...\ ,z_N$ absolute log fold changes.
 
 $$
 \hat{\sigma}_{mle} = \sqrt{\frac{1}{N}\sum z_i^{2}}
