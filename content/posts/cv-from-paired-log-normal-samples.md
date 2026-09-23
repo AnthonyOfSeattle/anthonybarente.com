@@ -1,7 +1,7 @@
 +++
 date = '2026-09-23T00:00:00Z'
 draft = false
-title = 'The MLE for the Log Normal CV'
+title = 'CV from paired log-normal samples'
 +++
 
 ### Background
