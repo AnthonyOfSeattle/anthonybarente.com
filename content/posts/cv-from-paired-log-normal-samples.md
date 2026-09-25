@@ -86,6 +86,10 @@ $$
 = \sqrt{\exp\left( \frac{1}{2N} \sum z\_i^{2} \right) - 1}
 $$
 
+> **_NOTE:_**  Remember the two critical transformations here.
+> First, remember $z\_i$ is the absolute natural log of the fold change, i.e. $z\_i = \left| \log(y\_i) - \log(x\_i) \right|$. 
+> Second, remember to multiply the estimate by a factor of 100 to get the CV on the standard scale, i.e. $CV = 100\ \theta$.
+
 ---
 
 * [1] Reed GF, Lynn F, and Meade BD (2002). Use of Coefficient of Variation in Assessing Variability of Quantitative Assays. *Clinical and Diagnostic Laboratory Immunology*, 1235-1239. DOI: [10.1128/cdli.9.6.1235-1239.2002](https://doi.org/10.1128/cdli.9.6.1235-1239.2002)
