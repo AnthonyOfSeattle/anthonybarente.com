@@ -90,6 +90,32 @@ $$
 > First, remember $z\_i$ is the absolute natural log of the fold change, i.e. $z\_i = \left| \log(y\_i) - \log(x\_i) \right|$. 
 > Second, remember to multiply the estimate by a factor of 100 to get the CV on the standard scale, i.e. $CV = 100\ \theta$.
 
+### Monte carlo simulations
+
+I ran a couple of quick simulations to show that this estimator gets us exactly what we are looking for.
+In the first simulation, I performed 2 draws of 10 and 100 samples from a log-normal distribution with progressively increasing CVs.
+The mean of the underlying normal distribution was kept at 10, which is reasonable for things like mass spectrometry.
+With the first draw, I calculated the "Classic CV Estimate", i.e. the standard deviation divided by mean.
+Then I calculated the "Paired CV Estimate" using the equation above.
+In each case I performed 1000 repetitions.
+
+![Alt text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_15_factor_distribution/cv_estimate_simulation_no_random_effect.svg)
+<img src="https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_15_factor_distribution/cv_estimate_simulation_no_random_effect.svg">
+
+Looking at the plot above, it is clear that both estimates are getting fairly close to the true CV.
+In fact, once we are at 100 samples, the bias and variance of the estimators are both very low.
+
+Where the estimator really comes in handy is when there is both random variation in the underlying variable being measured and technical variation.
+Think of a protein being measured in patient blood samples where every patient has a baseline expression value for that protein.
+In this second simulation, instead of keeping the mean of the underlying distribution at 10, I first added a small bit of noise to that mean for each pair of measurements.
+Therefore, 2 measurements were taken with $\mu\_i = 10 + 0.1\zeta\_i$, where $\zeta\_i$ wass draw from the standard normal distribution.
+
+![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_15_factor_distribution/cv_estimate_simulation_with_random_effect.svg)
+<img src="https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_15_factor_distribution/cv_estimate_simulation_with_random_effect.svg">
+
+Immediately we can see that the classic CV estimate just doesn't attempt to take into account the 2 components of the variance.
+The paired CV estimate, on the other hand, is able to regress out the effect coming from the $\zeta\_i$s.
+
 ---
 
 * [1] Reed GF, Lynn F, and Meade BD (2002). Use of Coefficient of Variation in Assessing Variability of Quantitative Assays. *Clinical and Diagnostic Laboratory Immunology*, 1235-1239. DOI: [10.1128/cdli.9.6.1235-1239.2002](https://doi.org/10.1128/cdli.9.6.1235-1239.2002)
