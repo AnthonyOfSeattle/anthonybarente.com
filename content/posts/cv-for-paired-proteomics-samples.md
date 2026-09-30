@@ -1,7 +1,7 @@
 +++
 date = '2026-09-28T00:00:00Z'
 draft = false
-title = 'CV for affinity proteomics'
+title = 'CV for paired proteomics samples'
 +++
 
 ### Background
@@ -9,26 +9,23 @@ title = 'CV for affinity proteomics'
 Back in 2022, Candia *et al.* [1] put out a nice study in *Scientific Reports* diving deep into preprocessing SomaScan datasets.
 Alongside their paper, they released a repository of anonymized raw and processed data with code for each step in their pipeline.
 This is an invaluable resource to get a handle on working with SomaScan data and discussing QC.
-In this post, I will discuss the many ways to get a coefficient of variation (CV) from this data and my thoughts on pitfalls.
 
 One of the cool things about the design in this dataset is that there are multiple types of samples with different purposes.
-On the technical side, there are buffer samples which act as negative controls for detection as well as 2 sets of pooled samples.
-The first set of pooled samples is denoted by QC below and these are provided by SomaLogic themselves.
-The second set, labeled Calibrator, is a set of pooled samples directly from this experiment.
-The authors use this Calibrator set extensively to normalize the data, and I will also look at the CV of these measurements below.
-
-Finally, there are the true samples (1704 of them) in the data.
-Within this set, there is a small subet of 102 which actually have 2 technical replicates falling on different plates.
-A clever bit of math will give us a CV from this data as well.
+In addition to 1704 experimental samples, the dataset contains pooled experiment "calibrator" samples and "qc" samples supplied by SomaLogic.
+There is also a series of "buffer" samples which can be used to assess limits of detection.
 
 ![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_plate_map.svg)
 <img src="https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_plate_map.svg">
+
+The calibrators were used extensively in the paper for data normalization, making them a bit suspect for calculating the coefficient of variation (CV).
+So the authors used 102 experiment samples which had 2 technical replicates in the experiment to show reduction in CV with processing steps.
+In this post, I will talk about how the authors calculated CV for these, why they used replicated samples, and a more straightforward alternative method for CV calculation.
 
 ### Classic CV on calibrators
 
 ### Classic CV breakdown on clinical samples
 
-### CV on paired clinical samples
+### CV on paired samples
 
 #### The method used in Candia *et al.*
 
