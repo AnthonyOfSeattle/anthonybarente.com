@@ -40,13 +40,37 @@ Check out how dramatic the difference can be between the pooled and patient samp
 For the calibrator samples, median plate CVs range from 2.41% to 5.38%, which fits well within the expected CVs compiled by SomaLogic.
 On the other hand, median plate CVs for patient samples range from 26.1% to 38.2%.
 
-### CV on paired samples
+### CV on paired samples (Candia *et al.*'s method)
 
-#### The method used in Candia *et al.*
+Measurement variation in samples from the same individual represent all the sources of variation since the samples were split.
+If we have two aliquots from the same blood draw, the variation represents the whole sample prep process.
+If two plate wells were filled using the same source, then the variation represents assay variability.
 
-#### Straight forward CV calculation
+In the Candia *et al.* dataset, there are a series of 102 samples with 2 technical replicates.
+Instead of looking at sample by sample variation, the authors look at the fold change between the two replicates (with the max measurment divided by the min measurement).
+They note that a 2002 article by Reed *et al.* [2] gives an expression for the theoretical number of these fold changes greater than a factor k. 
+
+$$
+P(\max \\{\frac{Y}{X}, \frac{X}{Y}\\} \ge k)
+= 2\Phi \left[ \frac{-\log(k)}{\sqrt{2\log((CV/100)^{2} + 1)}} \right],
+\quad k > 1
+$$
+
+An example of this curve is show below for the probe 2682-68 in blue.
+The theoretical curves for a CV of 10% and 20% are also shown.
+
+![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_fold_change_plot.svg)
+
+Since this makes a sort of distribution, Candia *et al.* posited that they could use the Komolgorov-Smirnov test to find a CV that gave a close theoretical distibrution. 
+While the p-value from this test is not super meaningful, the test statistic could be used as a loss function.
+Here, it can be interpreted as the max absolute deviation between the theoretical curve and the empirical curve.
+This is shown below by the red double arrow for the 20% CV curve.
+
+![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_fold_change_plot_with_loss.svg)
+
+### CV on paired samples (via maximum-likelihood)
 
 ---
 
 * [1] Candia J, Daya GN, Tanaka T, Ferrucci L, and Walker KA (2022). Assessment of variability in the plasma 7k SomaScan proteomics assay. *Scientific Reports*, 12:17147. DOI: [10.1038/s41598-022-22116-0](https://doi.org/10.1038/s41598-022-22116-0)
-
+* [2] Reed GF, Lynn F, and Meade BD (2002). Use of Coefficient of Variation in Assessing Variability of Quantitative Assays. *Clinical and Diagnostic Laboratory Immunology*, 1235-1239. DOI: [10.1128/cdli.9.6.1235-1239.2002](https://doi.org/10.1128/cdli.9.6.1235-1239.2002)
