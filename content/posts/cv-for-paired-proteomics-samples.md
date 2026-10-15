@@ -47,7 +47,7 @@ If we have two aliquots from the same blood draw, the variation represents the w
 If two plate wells were filled using the same source, then the variation represents assay variability.
 
 In the Candia *et al.* dataset, there are a series of 102 samples with 2 technical replicates.
-Instead of looking at sample by sample variation, the authors look at the fold change between the two replicates (with the max measurment divided by the min measurement).
+Instead of looking at sample by sample variation, the authors look at the fold change between the two replicates (with the max measurement divided by the min measurement).
 They note that a 2002 article by Reed *et al.* [2] gives an expression for the theoretical number of these fold changes greater than a factor k. 
 
 $$
@@ -61,12 +61,23 @@ The theoretical curves for a CV of 10% and 20% are also shown.
 
 ![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_fold_change_plot.svg)
 
-Since this makes a sort of distribution, Candia *et al.* posited that they could use the Komolgorov-Smirnov test to find a CV that gave a close theoretical distibrution. 
+Since the above can be transformed into a CDF, Candia *et al.* posited that they could use the Komolgorov-Smirnov test to find a CV that gave a close theoretical distibrution. 
 While the p-value from this test is not super meaningful, the test statistic could be used as a loss function.
 Here, it can be interpreted as the max absolute deviation between the theoretical curve and the empirical curve.
 This is shown below by the red double arrow for the 20% CV curve.
+Performing the KS test on a grid search of theoretical distributions gives us the ability to find the CV that achieves the minimum score.
 
-![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_fold_change_plot_with_loss.svg)
+{{< rawhtml >}}
+<div style="display: flex; gap: 1rem; justify-content: center; align-items: flex-start;">
+  <img src="https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_fold_change_plot_with_loss.svg" style="width: 50%;">
+  <img src="https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_ks_loss_optimization.svg" style="width: 50%;">
+</div>
+{{< /rawhtml >}}
+
+Applying this grid search to all of the probes is a bit time consuming, so I cut it down to just the first 2000.
+The median CV comes out around 4.25%, which is very close to the 4.5% reported by Candia *et al.*
+
+![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/probe_cv_distribution_ks_test.svg)
 
 ### CV on paired samples (via maximum-likelihood)
 
