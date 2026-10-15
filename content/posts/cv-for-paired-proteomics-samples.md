@@ -1,5 +1,5 @@
 +++
-date = '2026-09-28T00:00:00Z'
+date = '2026-10-15T00:00:00Z'
 draft = false
 title = 'CV for paired proteomics samples'
 +++
