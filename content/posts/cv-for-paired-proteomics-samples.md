@@ -81,6 +81,27 @@ The median CV comes out around 4.25%, which is very close to the 4.5% reported b
 
 ### CV on paired samples (via maximum-likelihood)
 
+I believe there are much easier ways to obtain an estimate of the CV from this data that don't involve a computationally expensive grid search.
+One these methods is a maximum likelihood estimate that I detailed in a [previous post](/posts/cv-from-paired-log-normal-samples).
+
+$$
+CV\_{mle}
+= 100*\sqrt{\exp\left( \frac{1}{2N} \sum z\_i^{2} \right) - 1}
+$$
+
+where the $z_i$ represent the absolute log fold changes, i.e. $z\_i = \left| \log(y\_i) - \log(x\_i) \right|$. 
+
+Looking back at our probe 2682-68, we can compare the behavior of the MLE estimate to the KS test.
+The MLE estimate is 15.0% CV, which seems to balance out error between the beginning and end of the distribtuion.
+The KS test CV at 11.75% on the otherhand seems to focus on reducing error early in the distribution.
+
+![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/example_fold_change_plot_comparing_estimates.svg)
+
+Applying this estimate to the same 2000 probes above, we get a median CV of 5.32%.
+This is higher than the Candia *et al.* estimate, but still quite good for patient samples.
+
+![Alt_text](https://raw.githubusercontent.com/AnthonyOfSeattle/affinity-proteomics-notebook/refs/heads/main/results/2026_09_09_investigating_candia_dispersion/probe_cv_distribution_mle.svg)
+
 ---
 
 * [1] Candia J, Daya GN, Tanaka T, Ferrucci L, and Walker KA (2022). Assessment of variability in the plasma 7k SomaScan proteomics assay. *Scientific Reports*, 12:17147. DOI: [10.1038/s41598-022-22116-0](https://doi.org/10.1038/s41598-022-22116-0)
