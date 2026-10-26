@@ -1,5 +1,5 @@
 +++
-date = '2026-10-23T00:00:00Z'
+date = '2026-10-26T00:00:00Z'
 draft = false
 title = 'CV from linear modeling'
 +++
